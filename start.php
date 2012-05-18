@@ -94,15 +94,11 @@ var timelineValuesEnd = 1570;
 
 
 </head>
-<body onResize="bodyResized();" onunload="GUnload()">
-  <DIV id="header">
-    <H1><a href="javascript:window.parent.location.href='http://witching.org/'">Witches in Early Modern England</a></H1>
-    <H2><div id="throwingBonesReadingLeavesHeader">
-	<a href="javascript:switchToReadingLeaves('Fulltext');">Full Text</a>, 
-	<a href="javascript:switchToReadingLeaves('Mapping');">Mapping Witches</a>, 
-	<a href="javascript:switchToReadingLeaves('HTMLF');">Reading Leaves</a>, 
-	Throwing Bones</div></H2>
-  </DIV>
+<body onresize="bodyresized();" onunload="gunload()">
+  <div id="header">
+    <h1><a href="javascript:window.parent.location.href='http://witching.org/'">witches in early modern england</a></h1>
+    <h2><div id="visualizationToolsHeader"></div></h2>
+  </div>
 
 <table border=0 cellpadding=0 cellspacing=0>
 <tr valign=top><td>
@@ -150,13 +146,13 @@ var timelineValuesEnd = 1570;
 		</td>
 		<td colspan=2>
 			<div>
-				<div id="throwingBonesContainer">
+				<div id="ThrowContainer">
 					<table border=0 cellpadding=0 cellspacing=1 width="1100">
 						<tr><td valign=top><div id="deckcontentdiv" style="width: 750px"></div></td>
 						<td valign=top><div id="timecontentdiv" style="height: 500px; overflow: auto"></div></td></tr>
 					</table>
 				</div>
-				<div id="readingLeavesContainer">
+				<div id="HTMLFContainer">
 					<div style="width: 750px">
 						<div id="testing"></div>
 						<canvas id="canvas" class="readingleavescanvas" width="1150" height="700">
@@ -168,13 +164,13 @@ var timelineValuesEnd = 1570;
 						<canvas id="miniatureedges" class="readingleavesminiatureedges" width="230" height="140"></canvas>
 					</div>
 				</div>
-				<div id="mappingContainer">
+				<div id="MappingContainer">
 					<table border=0 cellpadding=0 cellspacing=1 width="1100">	
 						<tr><td valign=top> <div id="map" style="width: 1100px; height: 860px"></div>  </td></tr>	
 						<tr><td valign=top> <div id="mapcontent"></div>  </td></tr>	
 					</table>
 				</div>
-				<div id="fullTextContainer">
+				<div id="FulltextContainer">
 					<table border=0 cellpadding=0 cellspacing=1 width="1100">	
 						<tr><td valign=top><div id="searchcontentdiv" style="width: 1100px"><H1>No results</H1><BR>Please use the search box, timeline and advance filters to search results.</div></td>
 					</table>
@@ -184,7 +180,6 @@ var timelineValuesEnd = 1570;
 		</td>
 	</tr>
 </table>
-
 
 </td>
 </tr>

@@ -1,6 +1,6 @@
 //////////////////////////////INIT FUNCTIONS//////////////////////////////////////////
 
-var throwOrHTMLF;
+var throwOrHTMLF = 'Throw';
 
 var numberOfDecksOnTable = 15;
 //var lastHash = "-1";
@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
 
 	$.history.init(function(hash){
 
-		switchToReadingLeaves('Throw');
+		swithVisualisationTool('Throw');
 
 		if(hash != "")
 		{
@@ -21,58 +21,45 @@ jQuery(document).ready(function($){
 	{ unescape: false });
 });
 
-
-
 var throwingBonesInitialized = 0;
 var readingLeavesInitialized = 0;
 var mappingInitialized = 0;
-var fullTextInitialized = 0;
 
-function switchToReadingLeaves(visOption){
+function swithVisualisationTool(selectedVisualisationTool){
 
-	document.getElementById('throwingBonesContainer').style.display 	= (visOption == 'Throw')? '': 'none'; 
-	document.getElementById('readingLeavesContainer').style.display 	= (visOption == 'HTMLF')? '': 'none'; 
-	document.getElementById('mappingContainer').style.display 		= (visOption == 'Mapping')? '': 'none'; 
-	document.getElementById('fullTextContainer').style.display 		= (visOption == 'Fulltext')? '': 'none'; 
+  $('#visualizationToolsHeader').hide('slow', function(){
+    var newVisTolHeader = '';
+    newVisTolHeader += (selectedVisualisationTool == 'Fulltext')? "Full Text, ": "<a href=\"javascript:swithVisualisationTool('Fulltext');\">Full Text</a>, ";
+    newVisTolHeader += (selectedVisualisationTool == 'Mappting')? "Mapping Witches, ": "<a href=\"javascript:swithVisualisationTool('Mapping');\">Mapping Witches</a>, ";
+    newVisTolHeader += (selectedVisualisationTool == 'HTMLF')? "Reading Leaves, ": "<a href=\"javascript:swithVisualisationTool('HTMLF');\">Reading Leaves</a>, ";
+    newVisTolHeader += (selectedVisualisationTool == 'Throw')? "Throwing Bones, ": "<a href=\"javascript:swithVisualisationTool('Throw');\">Throwing Bones</a>";
+    $('#visualizationToolsHeader').html(newVisTolHeader).show('slow');
+  });
 
-	if (visOption == 'Throw'){
-		document.getElementById('throwingBonesReadingLeavesHeader').innerHTML = "<a href=\"javascript:switchToReadingLeaves('Fulltext');\">Full Text</a>, \
-			<a href=\"javascript:switchToReadingLeaves('Mapping');\">Mapping Witches</a>, <a href=\"javascript:switchToReadingLeaves('HTMLF');\">Reading Leaves</a>, Throwing Bones";
+  $('#' + throwOrHTMLF + 'Container').hide('slow', function(){
+    if (selectedVisualisationTool == 'Throw'){
+      if (throwingBonesInitialized == 0){
+        throwingBonesInitialized = 1;
+	throw_timecontentdiv(1560, 1570, "Throw");
+	throw_timedecksdiv(1560, 1570, "Throw");
+      }
+    }else if (selectedVisualisationTool == 'HTMLF'){
+      if (readingLeavesInitialized == 0){
+	readingLeavesInitialized = 1;
+	getgraph();
+      }
+    }else if (selectedVisualisationTool == 'Mapping'){
+      if (mappingInitialized == 0){
+	mappingInitialized = 1;
+	throw_timedecksdiv(1530, 1690, "Mapping");
+      }
+    }
 
-		if (throwingBonesInitialized == 0){
-			throwingBonesInitialized = 1;
-			throw_timecontentdiv(1560, 1570, "Throw");
-			throw_timedecksdiv(1560, 1570, "Throw");
-		}
-	}else if (visOption == 'HTMLF'){
-		document.getElementById('throwingBonesReadingLeavesHeader').innerHTML = "<a href=\"javascript:switchToReadingLeaves('Fulltext');\">Full Text</a>, \
-			<a href=\"javascript:switchToReadingLeaves('Mapping');\">Mapping Witches</a>, Reading Leaves, <a href=\"javascript:switchToReadingLeaves('Throw');\">Throwing Bones</a>";
-
-		if (readingLeavesInitialized == 0){
-			readingLeavesInitialized = 1;
-			getgraph();
-		}
-
-	}else if (visOption == 'Mapping'){
-		document.getElementById('throwingBonesReadingLeavesHeader').innerHTML = "<a href=\"javascript:switchToReadingLeaves('Fulltext');\">Full Text</a>, Mapping Witches, \
-			<a href=\"javascript:switchToReadingLeaves('HTMLF');\">Reading Leaves</a>, <a href=\"javascript:switchToReadingLeaves('Throw');\"> Throwing Bones</a>";
-
-		if (mappingInitialized == 0){
-			mappingInitialized = 1;
-			throw_timedecksdiv(1530, 1690, "Mapping");
-		}
-
-	}else{
-		document.getElementById('throwingBonesReadingLeavesHeader').innerHTML = "Full Text, <a href=\"javascript:switchToReadingLeaves('Mapping');\">Mapping Witches</a>, \
-			<a href=\"javascript:switchToReadingLeaves('HTMLF');\">Reading Leaves</a>, <a href=\"javascript:switchToReadingLeaves('Throw');\"> Throwing Bones</a>";
-	}
-
-	throwOrHTMLF = visOption;
-//	lastHash = visOption;
-//	jQuery.history.load(visOption);
+    $('#' + selectedVisualisationTool + 'Container').show('fast');
+    throwOrHTMLF = selectedVisualisationTool;
+});
 
 }
-
 ///////////////////////////////////////////////
 ///////////// Filters /////////////////////////
 
